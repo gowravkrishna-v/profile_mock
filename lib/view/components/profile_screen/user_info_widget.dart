@@ -113,14 +113,14 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.profile.name ?? "",
+                      widget.profile.name ?? "N/A",
                       style: style9,
                     ),
                     const SizedBox(
                       height: 2,
                     ),
                     Text(
-                      widget.profile.email ?? "",
+                      widget.profile.email ?? "N/A",
                       style: style4.copyWith(
                         color: black54,
                       ),
@@ -129,7 +129,7 @@ class _UserInfoWidgetState extends State<UserInfoWidget> {
                       height: 8,
                     ),
                     Text(
-                      widget.profile.address.toString(),
+                      (widget.profile.address ?? "N/A").toString(),
                       style: style2,
                     ),
                   ],
