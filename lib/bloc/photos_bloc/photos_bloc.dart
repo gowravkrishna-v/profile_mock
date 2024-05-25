@@ -16,7 +16,8 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   }) : super(PhotosInitial()) {
     on<FetchPhotos>((event, emit) async {
       emit(PhotosFetchLoading());
-      if (event.isConnected) {
+      bool isConnected = await cloudRepository.ping();
+      if (isConnected) {
         var (List<PhotoModel> photos, String err) =
             await cloudRepository.fetchPhotos(
           event.albumId.toString(),

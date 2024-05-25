@@ -16,7 +16,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     on<FetchPosts>(
       (event, emit) async {
         emit(PostFetchLoading());
-        if (event.isConnected) {
+        bool isConnected = await cloudRepository.ping();
+        if (isConnected) {
           var (List<PostModel> posts, String err) =
               await cloudRepository.fetchPosts("1");
           if (err == "") {

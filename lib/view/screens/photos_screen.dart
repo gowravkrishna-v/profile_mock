@@ -1,4 +1,3 @@
-import 'package:profile_mock/bloc/network_connectivity_bloc/network_connectivity_bloc.dart';
 import 'package:profile_mock/bloc/photos_bloc/photos_bloc.dart';
 import 'package:profile_mock/utilities/theme.dart';
 import 'package:profile_mock/view/components/photos_screen/thumbnail_list_tile.dart';
@@ -28,10 +27,6 @@ class _PhotosScreenState extends State<PhotosScreen> {
     context.read<PhotosBloc>().add(
           FetchPhotos(
             albumId: widget.albumId,
-            isConnected: (context.read<NetworkConnectivityBloc>().state
-                    is NetworkConnectivitySuccess)
-                ? true
-                : false,
           ),
         );
     super.initState();
@@ -58,10 +53,6 @@ class _PhotosScreenState extends State<PhotosScreen> {
           context.read<PhotosBloc>().add(
                 FetchPhotos(
                   albumId: widget.albumId,
-                  isConnected: (context.read<NetworkConnectivityBloc>().state
-                          is NetworkConnectivitySuccess)
-                      ? true
-                      : false,
                 ),
               );
         },

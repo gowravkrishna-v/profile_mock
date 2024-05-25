@@ -1,6 +1,5 @@
 import 'package:profile_mock/bloc/albums_bloc/albums_bloc.dart';
 import 'package:profile_mock/bloc/comments_bloc/comments_bloc.dart';
-import 'package:profile_mock/bloc/network_connectivity_bloc/network_connectivity_bloc.dart';
 import 'package:profile_mock/bloc/photos_bloc/photos_bloc.dart';
 import 'package:profile_mock/bloc/posts_bloc/posts_bloc.dart';
 import 'package:profile_mock/bloc/profile_bloc/profile_bloc.dart';
@@ -31,12 +30,6 @@ class MainApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<NetworkConnectivityBloc>(
-            create: (context) => NetworkConnectivityBloc()
-              ..add(
-                NetworkObserve(),
-              ),
-          ),
           BlocProvider<PostsBloc>(
             create: (context) => PostsBloc(
               cloudRepository: context.read<CloudRepository>(),

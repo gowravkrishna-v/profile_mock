@@ -14,7 +14,8 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
       : super(CommentsInitial()) {
     on<FetchComments>((event, emit) async {
       emit(CommentsFetchLoading());
-      if (event.isConnected) {
+      bool isConnected = await cloudRepository.ping();
+      if (isConnected) {
         var (List<CommentModel> comments, String err) =
             await cloudRepository.fetchComments(event.postId);
         if (err == "") {

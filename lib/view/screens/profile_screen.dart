@@ -1,5 +1,4 @@
 import 'package:profile_mock/bloc/albums_bloc/albums_bloc.dart';
-import 'package:profile_mock/bloc/network_connectivity_bloc/network_connectivity_bloc.dart';
 import 'package:profile_mock/bloc/posts_bloc/posts_bloc.dart';
 import 'package:profile_mock/bloc/profile_bloc/profile_bloc.dart';
 import 'package:profile_mock/utilities/theme.dart';
@@ -28,28 +27,13 @@ class _ProfileScreenState extends State<ProfileScreen>
     tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     tabController.addListener(() {});
     context.read<ProfileBloc>().add(
-          FetchUserProfile(
-            isConnected: (context.read<NetworkConnectivityBloc>().state
-                    is NetworkConnectivitySuccess)
-                ? true
-                : false,
-          ),
+          FetchUserProfile(),
         );
     context.read<AlbumsBloc>().add(
-          FetchAlbums(
-            isConnected: (context.read<NetworkConnectivityBloc>().state
-                    is NetworkConnectivitySuccess)
-                ? true
-                : false,
-          ),
+          FetchAlbums(),
         );
     context.read<PostsBloc>().add(
-          FetchPosts(
-            isConnected: (context.read<NetworkConnectivityBloc>().state
-                    is NetworkConnectivitySuccess)
-                ? true
-                : false,
-          ),
+          FetchPosts(),
         );
   }
 
@@ -60,29 +44,16 @@ class _ProfileScreenState extends State<ProfileScreen>
         color: redAccent,
         onRefresh: () async {
           context.read<ProfileBloc>().add(
-                FetchUserProfile(
-                  isConnected: (context.read<NetworkConnectivityBloc>().state
-                          is NetworkConnectivitySuccess)
-                      ? true
-                      : false,
-                ),
+                FetchUserProfile(),
               );
           if (tabController.index == 0) {
             context.read<AlbumsBloc>().add(
-                  FetchAlbums(
-                    isConnected: (context.read<NetworkConnectivityBloc>().state
-                            is NetworkConnectivitySuccess)
-                        ? true
-                        : false,
-                  ),
+                  FetchAlbums(),
                 );
           } else {
-            context.read<PostsBloc>().add(FetchPosts(
-                  isConnected: (context.read<NetworkConnectivityBloc>().state
-                          is NetworkConnectivitySuccess)
-                      ? true
-                      : false,
-                ));
+            context.read<PostsBloc>().add(
+                  FetchPosts(),
+                );
           }
         },
         child: Stack(

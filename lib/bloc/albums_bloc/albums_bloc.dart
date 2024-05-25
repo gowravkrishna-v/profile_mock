@@ -16,7 +16,8 @@ class AlbumsBloc extends Bloc<AlbumsEvent, AlbumsState> {
   }) : super(AlbumsInitial()) {
     on<FetchAlbums>((event, emit) async {
       emit(AlbumsFetchLoading());
-      if (event.isConnected) {
+      bool isConnected = await cloudRepository.ping();
+      if (isConnected) {
         var (List<AlbumModel> albums, String err) =
             await cloudRepository.fetchAlbums("1");
         if (err == "") {

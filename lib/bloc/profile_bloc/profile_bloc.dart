@@ -16,7 +16,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }) : super(ProfileInitial()) {
     on<FetchUserProfile>((event, emit) async {
       emit(ProfileFetchLoading());
-      if (event.isConnected) {
+      bool isConnected = await cloudRepository.ping();
+      if (isConnected) {
         var (ProfileModel profile, String err) =
             await cloudRepository.fetchProfile("1");
         if (err == "") {

@@ -6,9 +6,22 @@ import 'package:profile_mock/model/profile_model.dart';
 import 'package:profile_mock/utilities/isar_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
+import 'dart:io';
 
 class CloudRepository {
   final IsarService isarService = IsarService();
+  Future<bool> ping() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+      return false;
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
   Future<(List<AlbumModel>, String)> fetchAlbums(String userId) async {
     try {
       Uri url = Uri.parse(

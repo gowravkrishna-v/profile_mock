@@ -1,5 +1,4 @@
 import 'package:profile_mock/bloc/comments_bloc/comments_bloc.dart';
-import 'package:profile_mock/bloc/network_connectivity_bloc/network_connectivity_bloc.dart';
 import 'package:profile_mock/model/post_model.dart';
 import 'package:profile_mock/utilities/theme.dart';
 import 'package:profile_mock/view/components/posts_screen/comments_tile.dart';
@@ -24,10 +23,6 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     context.read<CommentsBloc>().add(FetchComments(
           postId: widget.currentPost.id.toString(),
-          isConnected: (context.read<NetworkConnectivityBloc>().state
-                  is NetworkConnectivitySuccess)
-              ? true
-              : false,
         ));
     super.initState();
   }
@@ -51,10 +46,6 @@ class _PostScreenState extends State<PostScreen> {
         onRefresh: () async {
           context.read<CommentsBloc>().add(FetchComments(
                 postId: widget.currentPost.id.toString(),
-                isConnected: (context.read<NetworkConnectivityBloc>().state
-                        is NetworkConnectivitySuccess)
-                    ? true
-                    : false,
               ));
         },
         child: SingleChildScrollView(
