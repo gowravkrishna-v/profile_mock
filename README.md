@@ -7,7 +7,7 @@ This project consists of a profile page that displays user details, user posts, 
 - Clone the project
 
 ```
-  git clone https://link-to-project
+  git clone https://github.com/gowravkrishna-v/profile_mock.git
 ```
 
 - Go to the project directory
